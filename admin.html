@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - Admin</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 30px;
+      background: #f0f4f8;
+    }
+    h2 {
+      color: #2e7d32;
+      text-align: center;
+    }
+    .box {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #ffffff;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    input[type="date"] {
+      padding: 6px;
+      width: 200px;
+      margin: 8px 0;
+    }
+    button {
+      padding: 6px 12px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📊 لوحة تحكم البيانات</h2>
+
+  <div class="box" id="totalCustomers">📦 عدد العملاء الكلي: جاري التحميل...</div>
+
+  <div class="box">
+    <label>📅 عدد العملاء في تاريخ معين:</label><br>
+    <input type="date" id="dateInput">
+    <button onclick="getByDate()">عرض</button>
+    <div id="dateCount"></div>
+  </div>
+
+  <div class="box" id="typeStats">📈 تحليل حسب نوع الطلب: جاري التحميل...</div>
+
+  <div class="box" id="topTech">🛠️ أكثر فني اشتغل: جاري التحميل...</div>
+
+  <div class="box">
+    <label>📆 عدد مرات شغل كل فني في تاريخ معين:</label><br>
+    <input type="date" id="techDateInput">
+    <button onclick="getTechsByDate()">عرض</button>
+    <ul id="techList"></ul>
+  </div>
+
+  <script>
+    const baseUrl = "http://localhost:3000";
+
+    fetch(`${baseUrl}/api/customers/count`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("totalCustomers").innerText = `📦 عدد العملاء الكلي: ${data.count}`;
+      });
+
+    fetch(`${baseUrl}/api/customers/stats`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("typeStats").innerText =
+          `📈 الأعطال: ${data["عطل"]} | الشراء: ${data["شراء"]}`;
+      });
+
+    fetch(`${baseUrl}/api/technician/top`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("topTech").innerText =
+          `🛠️ الفني: ${data.topTechnician} | عدد مرات الشغل: ${data.count}`;
+      });
+
+    function getByDate() {
+      const date = document.getElementById("dateInput").value;
+      fetch(`${baseUrl}/api/customers/by-date/${date}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("dateCount").innerText =
+            `📅 عدد العملاء في ${date}: ${data.count}`;
+        });
+    }
+
+    function getTechsByDate() {
+      const date = document.getElementById("techDateInput").value;
+      fetch(`${baseUrl}/api/technicians/by-date/${date}`)
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById("techList");
+          list.innerHTML = "";
+          for (const tech in data.technicians) {
+            const li = document.createElement("li");
+            li.innerText = `🧰 ${tech}: ${data.technicians[tech]} مرة`;
+            list.appendChild(li);
+          }
+        });
+    }
+  </script>
+
+  <a href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+</body>
+</html>

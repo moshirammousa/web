@@ -1,0 +1,38 @@
+[
+  {
+    "techCode": "تهت8غ9ح",
+    "techName": "هخعكلمحغنغ",
+    "problem": "علمهغعيفنغقتفسثاقصل",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-06-05T13:21:12.234Z"
+  },
+  {
+    "techCode": "55",
+    "techName": "سيف",
+    "problem": "خجخنهاعغل",
+    "device": {
+      "code": "AC1001",
+      "name": "تكييف سامسونج",
+      "type": "سبليت",
+      "model": "QX-2200"
+    },
+    "createdAt": "2025-06-05T20:54:35.535Z"
+  },
+  {
+    "techCode": "66",
+    "techName": "وليد",
+    "problem": "تسريب",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-06-07T10:24:00.900Z"
+  }
+]

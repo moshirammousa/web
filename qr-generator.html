@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>توليد كود QR</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    input, button {
+      width: 300px;
+      padding: 10px;
+      margin: 10px auto;
+      display: block;
+      font-size: 16px;
+    }
+    canvas {
+      margin: 20px auto;
+      display: block;
+      background: white;
+      border: 1px solid #ccc;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #qrCanvas {
+        visibility: visible !important;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎯 توليد وطباعة كود QR</h2>
+
+  <input type="text" id="code" placeholder="كود الجهاز">
+  <input type="text" id="name" placeholder="اسم الجهاز">
+  <input type="text" id="type" placeholder="نوع الجهاز">
+  <input type="text" id="model" placeholder="موديل الجهاز">
+
+  <button onclick="generateQR()">📦 توليد الكود</button>
+
+  <canvas id="qrCanvas" width="250" height="250"></canvas>
+
+  <button onclick="window.print()">🖨️ طباعة الكود فقط</button>
+  <button onclick="saveImage()">💾 حفظ الكود كصورة</button>
+  <br>
+  <a href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+
+  <script>
+    function generateQR() {
+      const code = document.getElementById("code").value;
+      const name = document.getElementById("name").value;
+      const type = document.getElementById("type").value;
+      const model = document.getElementById("model").value;
+
+      const content = `code=${code};name=${name};type=${type};model=${model}`;
+
+      new QRious({
+        element: document.getElementById("qrCanvas"),
+        value: content,
+        size: 250,
+        level: 'H'
+      });
+    }
+
+    function saveImage() {
+      const canvas = document.getElementById("qrCanvas");
+      const link = document.createElement("a");
+      link.download = "qr-code.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
+

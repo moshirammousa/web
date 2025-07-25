@@ -34,5 +34,53 @@
       "model": "SMX2024"
     },
     "createdAt": "2025-06-07T10:24:00.900Z"
+  },
+  {
+    "techCode": "33",
+    "techName": "عمر",
+    "problem": "خن098عغ98",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-06-07T20:13:24.620Z"
+  },
+  {
+    "techCode": "1",
+    "techName": "محمد",
+    "problem": "تسريب",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-07-25T11:22:55.161Z"
+  },
+  {
+    "techCode": "2",
+    "techName": "محمد",
+    "problem": "تسريب\n",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-07-25T21:14:41.773Z"
+  },
+  {
+    "techCode": "2",
+    "techName": "محمد",
+    "problem": "تسريب\n",
+    "device": {
+      "code": "AC123",
+      "name": "سامسونج",
+      "type": "سبليت",
+      "model": "SMX2024"
+    },
+    "createdAt": "2025-07-25T21:14:49.729Z"
   }
 ]

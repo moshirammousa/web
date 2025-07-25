@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -51,3 +52,58 @@
   </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل عميل</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>تسجيل بيانات عميل</h2>
+  <form id="customerForm">
+    الاسم: <input type="text" id="c_name"><br>
+    نوع الطلب:
+    <select id="c_type">
+      <option value="عطل">عطل</option>
+      <option value="شراء">شراء</option>
+    </select><br>
+    التفاصيل: <textarea id="c_message"></textarea><br>
+    <button type="submit">إرسال</button>
+    <br>
+    <a href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+
+  </form>
+  <script>
+    document.getElementById("customerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = {
+      name: document.getElementById("c_name").value,
+      type: document.getElementById("c_type").value,
+      message: document.getElementById("c_message").value
+    };
+
+    fetch("http://localhost:3000/api/customer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+      alert(res.message);
+    
+      });
+      });
+  </script>
+  
+  <script>
+    document.getElementById("customerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("✅ تم إرسال بيانات العميل");
+      
+    });
+  </script>
+</body>
+</html>
+>>>>>>> 3cff32c869d853a1144d8622f590c8880430ef17

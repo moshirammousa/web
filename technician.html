@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -135,4 +136,143 @@
     });
   </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل فني</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+      direction: rtl;
+    }
+    h2 {
+      text-align: center;
+      color: #1e88e5;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+    }
+    .hidden {
+      display: none;
+    }
+    #reader {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+  <h2>📋 تسجيل بيانات فني</h2>
+
+  <form id="technicianForm">
+    كود الفني:
+    <input type="text" id="t_code" required>
+
+    اسم الفني:
+    <input type="text" id="t_name" required>
+
+    <div id="reader" style="width: 300px; margin: auto;"></div>
+    <button type="button" onclick="startScan()">📷 اسكان الكود</button>
+
+    <!-- بيانات الجهاز (مخفية) -->
+    <div class="hidden">
+      <input type="text" id="device_code" readonly>
+      <input type="text" id="device_name" readonly>
+      <input type="text" id="device_type" readonly>
+      <input type="text" id="device_model" readonly>
+    </div>
+
+    المشكلة:
+    <textarea id="t_problem" required></textarea>
+
+    <button type="submit">تسجيل</button>
+  </form>
+  <br>
+  <a href="index.html">🔙 رجوع للصفحة الرئيسية</a>
+
+  <script>
+    function startScan() {
+      const qr = new Html5Qrcode("reader");
+      const config = { fps: 10, qrbox: 250 };
+
+      qr.start(
+        { facingMode: "environment" },
+        config,
+        qrCodeMessage => {
+          qr.stop();
+          document.getElementById("reader").innerHTML = "";
+
+          const parts = qrCodeMessage.split(";");
+          const data = {};
+          parts.forEach(part => {
+            const [key, value] = part.split("=");
+            data[key.trim()] = value?.trim();
+          });
+
+          document.getElementById("device_code").value = data.code || "";
+          document.getElementById("device_name").value = data.name || "";
+          document.getElementById("device_type").value = data.type || "";
+          document.getElementById("device_model").value = data.model || "";
+        },
+        error => {}
+      ).catch(err => {
+        alert("📛 لا يمكن فتح الكاميرا: " + err);
+      });
+    }
+
+    document.getElementById("technicianForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const data = {
+        techCode: document.getElementById("t_code").value,
+        techName: document.getElementById("t_name").value,
+        problem: document.getElementById("t_problem").value,
+        device: {
+          code: document.getElementById("device_code").value,
+          name: document.getElementById("device_name").value,
+          type: document.getElementById("device_type").value,
+          model: document.getElementById("device_model").value
+        }
+      };
+
+      fetch("http://localhost:3000/api/technician", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(res => {
+        alert(res.message || "✅ تم تسجيل الفني بنجاح");
+       
+      })
+      .catch(err => {
+        alert("❌ خطأ أثناء الحفظ: " + err);
+      });
+    });
+  </script>
+</body>
+>>>>>>> 3cff32c869d853a1144d8622f590c8880430ef17
 </html>

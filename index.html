@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -37,3 +38,44 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نظام شركة التكييفات</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>نظام شركة التكييفات</h2>
+  <button onclick="location.href='customer.html'">عميل</button>
+  <button onclick="location.href='technician.html'">فني</button>
+  <button onclick="goToQR()">🎯 توليد كود QR</button>
+  <button onclick="goToAdmin()">🛡️ لوحة التحكم (Admin)</button>
+
+  <script>
+    function goToAdmin() {
+      const password = prompt("🔒 من فضلك أدخل كلمة السر:");
+
+      if (password === "1234") {
+        window.location.href = "admin.html";
+      } else {
+        alert("❌ كلمة السر غير صحيحة!");
+      }
+    }
+  </script>
+  <script>
+    function goToQR() {
+      const password = prompt("🔒 من فضلك أدخل كلمة السر:");
+
+      if (password === "1234") {
+        window.location.href = "qr-generator.html";
+      } else {
+        alert("❌ كلمة السر غير صحيحة!");
+      }
+    }
+  </script>
+
+</body>
+</html>
+>>>>>>> 3cff32c869d853a1144d8622f590c8880430ef17
